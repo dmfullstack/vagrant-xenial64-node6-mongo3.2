@@ -31,14 +31,14 @@ class ubuntumongo {
     source  => '/vagrant/support/mongodb.service',
   }
 
-  exec { 'disable systemd mongo service':
-    command => '/usr/bin/sudo systemctl disable mongodb.service',
+  exec { 'enable systemd mongo service':
+    command => '/usr/bin/sudo systemctl enable mongodb.service',
     require => Package['mongodb-org'],
   }
 
-  exec { 'stop systemd mongo service':
-    command => '/usr/bin/sudo systemctl stop mongodb.service',
-    require => Exec['disable systemd mongo service'],
+  exec { 'start systemd mongo service':
+    command => '/usr/bin/sudo systemctl start mongodb.service',
+    require => Exec['enable systemd mongo service'],
   }
 }
 
